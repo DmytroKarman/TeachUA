@@ -5,6 +5,8 @@ import com.softserve.teachua.model.marker.Archivable;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,5 +26,8 @@ public class ContactType implements Convertible, Archivable {
 
     @Column
     private String urlLogo;
+
+    @OneToMany(mappedBy = "club")
+    Set<ClubContacts> clubContacts = new HashSet<>();
 
 }

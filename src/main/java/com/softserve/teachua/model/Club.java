@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -53,6 +54,10 @@ public class Club implements Convertible, Archivable {
     private String workTime;
 
     @Column
+    private String socialLinks;
+
+
+    @Column
     private Double latitude;
 
     @Column
@@ -93,6 +98,6 @@ public class Club implements Convertible, Archivable {
     @ToString.Exclude
     private Station station;
 
-    @Column
-    private Boolean isApproved;
+    @OneToMany(mappedBy = "contactType")
+    Set<ClubContacts> clubContacts = new HashSet<>();
 }
