@@ -30,7 +30,7 @@ public class Club implements Convertible, Archivable {
     @Column
     private Integer ageTo;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     @EqualsAndHashCode.Include
     private String name;
 
@@ -98,6 +98,9 @@ public class Club implements Convertible, Archivable {
     @ToString.Exclude
     private Station station;
 
-    @OneToMany(mappedBy = "contactType")
+    @Column
+    private Boolean isApproved;
+
+    @OneToMany(mappedBy = "club")
     Set<ClubContacts> clubContacts = new HashSet<>();
 }

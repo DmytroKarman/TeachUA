@@ -5,6 +5,8 @@ import com.softserve.teachua.model.marker.Archivable;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +21,7 @@ public class Center implements Convertible, Archivable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String name;
 
     @Column
@@ -53,5 +55,8 @@ public class Center implements Convertible, Archivable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ToString.Exclude
     private User user;
+
+    @OneToMany(mappedBy = "center")
+    Set<CenterContacts> centerContacts = new HashSet<>();
 
 }

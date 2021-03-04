@@ -12,21 +12,21 @@ import javax.persistence.*;
 @With
 @Builder
 @Entity
-@Table(name = "club_contacts")
-public class ClubContacts implements Convertible, Archivable {
+@Table(name = "center_contacts")
+public class CenterContacts implements Convertible, Archivable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "club_id", referencedColumnName = "id", nullable = false)
-    private Club club;
+    @JoinColumn(name = "center_id", referencedColumnName = "id", nullable = false)
+    Center center;
 
     @ManyToOne
     @JoinColumn(name = "contact_type_id", referencedColumnName = "id", nullable = false)
-    private ContactType clubContactType;
+    ContactType centerContactType;
 
     @Column
-    private String contact;
+    String contact;
 }

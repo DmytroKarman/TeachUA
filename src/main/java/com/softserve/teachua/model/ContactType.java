@@ -27,7 +27,9 @@ public class ContactType implements Convertible, Archivable {
     @Column
     private String urlLogo;
 
-    @OneToMany(mappedBy = "club")
+    @OneToMany(mappedBy = "clubContactType")
     Set<ClubContacts> clubContacts = new HashSet<>();
 
+    @OneToMany(mappedBy = "centerContactType")
+    Set<CenterContacts> centerContacts = new HashSet<>();
 }
