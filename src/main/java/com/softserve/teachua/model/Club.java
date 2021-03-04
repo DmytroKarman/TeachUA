@@ -54,10 +54,6 @@ public class Club implements Convertible, Archivable {
     private String workTime;
 
     @Column
-    private String socialLinks;
-
-
-    @Column
     private Double latitude;
 
     @Column

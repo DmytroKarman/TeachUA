@@ -43,9 +43,6 @@ public class Center implements Convertible, Archivable {
     private String urlLogo;
 
     @Column
-    private String socialLinks;
-
-    @Column
     private Double latitude;
 
     @Column
