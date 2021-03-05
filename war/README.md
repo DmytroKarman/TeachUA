@@ -5,3 +5,4 @@ Start URI: /dev
 
 PUBLIC_URL=/dev
 STATIC_FOLDER=frontend
+UPLOAD_PATH=target/upload
