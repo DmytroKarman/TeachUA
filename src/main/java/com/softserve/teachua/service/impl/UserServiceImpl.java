@@ -10,6 +10,7 @@ import com.softserve.teachua.exception.NotExistException;
 import com.softserve.teachua.exception.WrongAuthenticationException;
 import com.softserve.teachua.model.User;
 import com.softserve.teachua.repository.UserRepository;
+import com.softserve.teachua.security.JwtProvider;
 import com.softserve.teachua.security.service.EncoderService;
 import com.softserve.teachua.service.ArchiveService;
 import com.softserve.teachua.service.RoleService;
@@ -17,6 +18,10 @@ import com.softserve.teachua.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,16 +46,21 @@ public class UserServiceImpl implements UserService {
     private final RoleService roleService;
     private final DtoConverter dtoConverter;
     private final ArchiveService archiveService;
+    private final JwtProvider jwtProvider;
+    private final AuthenticationManager authenticationManager;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
                            EncoderService encodeService,
-                           RoleService roleService, DtoConverter dtoConverter, ArchiveService archiveService) {
+                           RoleService roleService, DtoConverter dtoConverter, ArchiveService archiveService
+    ,JwtProvider jwtProvider,AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
         this.encodeService = encodeService;
         this.roleService = roleService;
         this.dtoConverter = dtoConverter;
         this.archiveService = archiveService;
+        this.jwtProvider = jwtProvider;
+        this.authenticationManager = authenticationManager;
     }
 
     /**
@@ -166,8 +176,18 @@ public class UserServiceImpl implements UserService {
         }
 
         log.info("user {} logged successfully", userLogin);
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        userLogin.getEmail(),
+                        userLogin.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
         return dtoConverter.convertFromDtoToDto(userEntity, new SuccessLogin())
-                .withAccessToken(encodeService.createToken(userEntity.getEmail()));
+                .withAccessToken(jwtProvider.generateToken(authentication));
     }
 
     /**
