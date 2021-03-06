@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-
     UserRepository userRepository;
 
     @Override
@@ -26,7 +25,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with email : " + email)
                 );
-
         return UserPrincipal.create(user);
     }
 
@@ -35,7 +33,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("User", "id")
         );
-
         return UserPrincipal.create(user);
     }
 }

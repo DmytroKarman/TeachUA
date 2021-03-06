@@ -22,7 +22,6 @@ public class JwtProvider {
 
     public String generateToken(Authentication authentication) {
 
-
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         Date date = Date.from(LocalDate.now()
@@ -36,7 +35,7 @@ public class JwtProvider {
                 .compact();
     }
 
-    public Long getUserIdFromToken(String token){
+    public Long getUserIdFromToken(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(jwtSecret)
                 .parseClaimsJws(token)

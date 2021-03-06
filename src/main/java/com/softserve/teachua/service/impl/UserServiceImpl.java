@@ -208,6 +208,11 @@ public class UserServiceImpl implements UserService {
         return dtoConverter.convertToDto(userRepository.save(newUser), SuccessUpdatedUser.class);
     }
 
+    @Override
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
+
     /**
      * The method returns dto {@code UserResponse} of deleted user by id.
      *

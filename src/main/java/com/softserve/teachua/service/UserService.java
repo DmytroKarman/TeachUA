@@ -24,4 +24,6 @@ public interface UserService {
     SuccessLogin validateUser(UserLogin userLogin);
 
     SuccessUpdatedUser updateUser(Long id, UserProfile userProfile);
+
+    void updateUser(User user);
 }

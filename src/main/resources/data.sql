@@ -5,7 +5,8 @@ values ('ROLE_ADMIN'),
 insert into users(email, password,url_logo, first_name, last_name, phone, role_id, provider)
 values ('admin@gmail.com', '$2y$12$iod5PRHZaYrIO6L3onnnk.Mhx9Hc1lb2ehBi0hRvPDD83u6OM/b66','/dev/static/images/user/avatar/user1.png', 'Admin', 'Admin', '+38000000000', 1,'local'),
        ('user@gmail.com', '$2y$12$aDvzOnearRd4eulVJID3pOufutAIXVU5i1GKhgpXuvyVmktuSAmqe','/dev/static/images/user/avatar/user2.png','user', 'user', '+38000000000', 2, 'local'),
-       ('user2@gmail.com', '$2y$12$aDvzOnearRd4eulVJID3pOufutAIXVU5i1GKhgpXuvyVmktuSAmqe','/dev/static/images/user/avatar/user3.png','user2', 'user2', '+38000000000', 2, 'local');
+       ('user2@gmail.com', '$2y$12$aDvzOnearRd4eulVJID3pOufutAIXVU5i1GKhgpXuvyVmktuSAmqe','/dev/static/images/user/avatar/user3.png','user2', 'user2', '+38000000000', 2, 'local'),
+       ('user4@gmail.com', '$2y$12$aDvzOnearRd4eulVJID3pOufutAIXVU5i1GKhgpXuvyVmktuSAmqe','/dev/static/images/user/avatar/user3.png','user2', 'user2', '+38000000000', 2, 'local');
 
 insert into cities(name, latitude, longitude)
 values ('Київ', 50.4501, 30.5234),
