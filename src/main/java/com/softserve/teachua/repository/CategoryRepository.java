@@ -26,4 +26,8 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Query(value = "SELECT *  FROM categories AS c WHERE LOWER(c.name) LIKE LOWER('%' || :text || '%') ORDER BY RANDOM() LIMIT 3",
             nativeQuery = true)
     List<Category> findRandomTop3ByName(@Param("text") String enteredText);
+
+    @Query(value = "SELECT *  FROM categories AS c WHERE LOWER(c.name) LIKE LOWER('%' || :text || '%')",
+            nativeQuery = true)
+    List<Category> findAllByName(@Param("text") String enteredText);
 }

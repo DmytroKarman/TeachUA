@@ -54,7 +54,16 @@ public class ClubServiceImpl implements ClubService {
     private final UserService userService;
 
     @Autowired
-    public ClubServiceImpl(ClubRepository clubRepository, LocationRepository locationRepository, DtoConverter dtoConverter, ArchiveService archiveService, CityService cityService, DistrictService districtService, StationService stationService, CategoryService categoryService, UserService userService) {
+    public ClubServiceImpl(ClubRepository clubRepository,
+                           LocationRepository locationRepository,
+                           DtoConverter dtoConverter,
+                           ArchiveService archiveService,
+                           CityService cityService,
+                           DistrictService districtService,
+                           StationService stationService,
+                           CategoryService categoryService,
+                           UserService userService,
+                           ClubToClubResponseConverter toClubResponseConverter) {
         this.clubRepository = clubRepository;
         this.locationRepository = locationRepository;
         this.dtoConverter = dtoConverter;
@@ -277,6 +286,20 @@ public class ClubServiceImpl implements ClubService {
      */
     @Override
     public List<SearchPossibleResponse> getPossibleClubByName(String text, String cityName) {
+        return clubRepository.findTop3ByName(text, cityName, PageRequest.of(0, 3))
+                .stream()
+                .map(category -> (SearchPossibleResponse) dtoConverter.convertToDto(category, SearchPossibleResponse.class))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * The method which return possible results of search by entered text.
+     *
+     * @param text -  put text of search (based on clubName & cityName)
+     * @return {@code List<SearchPossibleResponse>}
+     */
+    @Override
+    public List<SearchPossibleResponse> getAllPossibleClubByName(String text, String cityName) {
         return clubRepository.findTop3ByName(text, cityName, PageRequest.of(0, 3))
                 .stream()
                 .map(category -> (SearchPossibleResponse) dtoConverter.convertToDto(category, SearchPossibleResponse.class))

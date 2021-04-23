@@ -186,6 +186,19 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     /**
+     * The method returns list of dto {@code List<SearchPossibleResponse>} categories by name.
+     *
+     * @return new {@code List<SearchPossibleResponse>}.
+     */
+    @Override
+    public List<SearchPossibleResponse> getAllPossibleCategoryByName(String text) {
+        return categoryRepository.findAllByName(text)
+                .stream()
+                .map(category -> (SearchPossibleResponse) dtoConverter.convertToDto(category, SearchPossibleResponse.class))
+                .collect(Collectors.toList());
+    }
+
+    /**
      * The method returns dto {@code CategoryProfile} of updated category.
      *
      * @param categoryProfile - place body of dto {@code CategoryProfile}.

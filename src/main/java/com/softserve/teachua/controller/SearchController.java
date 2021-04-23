@@ -35,4 +35,20 @@ public class SearchController implements Api {
                 .clubs(clubService.getPossibleClubByName(text, cityName))
                 .build();
     }
+
+    /**
+     * The method which return full list of possible results of search by entered text.
+     *
+     * @param text - put search text.
+     * @return {@link CombinedPossibleResponse }
+     */
+    @GetMapping("/search/all")
+    public CombinedPossibleResponse allPossibleResponses(
+            @RequestParam String text,
+            @RequestParam String cityName) {
+        return CombinedPossibleResponse.builder()
+                .categories(categoryService.getAllPossibleCategoryByName(text))
+                .clubs(clubService.getPossibleClubByName(text, cityName))
+                .build();
+    }
 }

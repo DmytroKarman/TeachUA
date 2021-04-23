@@ -30,6 +30,8 @@ public interface ClubService {
 
     List<ClubResponse> getListOfClubs();
 
+    List<SearchPossibleResponse> getAllPossibleClubByName(String text, String cityName);
+
     Page<ClubResponse> getClubsByUserId(Long id, Pageable pageable);
 
     List<ClubResponse> getSimilarClubsByCategoryName(SimilarClubProfile similarClubProfile);

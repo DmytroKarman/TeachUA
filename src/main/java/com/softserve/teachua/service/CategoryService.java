@@ -29,5 +29,7 @@ public interface CategoryService {
 
     List<SearchPossibleResponse> getPossibleCategoryByName(String text);
 
+    List<SearchPossibleResponse> getAllPossibleCategoryByName(String text);
+
     CategoryProfile updateCategory(Long id, CategoryProfile categoryProfile);
 }
